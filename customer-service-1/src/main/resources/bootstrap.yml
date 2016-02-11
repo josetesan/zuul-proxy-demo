@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: customer-service-1
+
+server:
+    port: 10001
+
+## This enables registration of this application to the service registry
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: ${SERVICE_REGISTRY_URL:http://localhost:8761/eureka/}
+        healthcheck:
+            enabled: false
+    instance:
+        hostname: localhost
+        metadataMap:
+          hostname: ${eureka.instance.hostname}

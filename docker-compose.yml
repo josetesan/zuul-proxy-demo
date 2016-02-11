@@ -1,0 +1,33 @@
+eureka-server:
+  build: cloud-eureka/
+  ports:
+    - "8761:8761"
+
+customer-service-1:
+  build: customer-service-1/
+  ports:
+    - "10001:10001"
+  links:
+    - eureka-server
+  environment:
+    - SERVICE_REGISTRY_URL
+
+customer-service-2:
+  build: customer-service-2/
+  ports:
+    - "10002:10002"
+  links:
+    - eureka-server
+  environment:
+    - SERVICE_REGISTRY_URL
+
+zuul-proxy:
+  build: zuul-proxy/
+  ports:
+    - "8000:8000"
+  links:
+    - eureka-server
+    - customer-service-1
+    - customer-service-2
+  environment:
+    - SERVICE_REGISTRY_URL

@@ -1,0 +1,6 @@
+rootProject.name = 'CloudDemo'
+
+include "cloud-eureka"
+include "customer-service-1"
+include "customer-service-2"
+include "zuul-proxy"
